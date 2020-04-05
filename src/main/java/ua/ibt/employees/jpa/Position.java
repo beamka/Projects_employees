@@ -1,4 +1,4 @@
-package ua.ibt.jpa;
+package ua.ibt.employees.jpa;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

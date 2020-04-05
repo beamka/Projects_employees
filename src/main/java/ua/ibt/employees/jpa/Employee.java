@@ -1,15 +1,10 @@
-package ua.ibt.jpa;
+package ua.ibt.employees.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -48,6 +43,12 @@ public class Employee implements Serializable {
 
     @Column(name = "id_position")
     private Long idPosition;
+
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "project", joinColumns =
+    @JoinColumn(name = "id_employee"),
+            inverseJoinColumns = @JoinColumn(name = "id_project"))
+    private List<Project> projects;
 
     public Employee() {
     }
