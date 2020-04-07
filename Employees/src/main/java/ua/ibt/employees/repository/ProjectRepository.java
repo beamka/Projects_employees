@@ -9,5 +9,5 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
     @Override
     List<Project> findAll();
 
-    Project findOne(Long idProject);
+    //Project findOne(Long idProject);
 }

@@ -57,7 +57,7 @@ public class Employee implements Serializable {
         this.idEmployee = idEmployee;
     }
 
-    public Employee(Long idEmployee, String iuadEmployee, String nameEmployee, String surnameEmployee, String middlenameEmployee, Date birthdayEmployee, Long idPosition) {
+    public Employee(Long idEmployee, String iuadEmployee, String nameEmployee, String surnameEmployee, String middlenameEmployee, Date birthdayEmployee, Long idPosition, List<Project> projects) {
         super();
         this.idEmployee = idEmployee;
         this.iuadEmployee = iuadEmployee;
@@ -66,6 +66,7 @@ public class Employee implements Serializable {
         this.middlenameEmployee = middlenameEmployee;
         this.birthdayEmployee = birthdayEmployee;
         this.idPosition = idPosition;
+        this.projects = projects;
     }
 
     public Long getIdEmployee() {
@@ -122,6 +123,14 @@ public class Employee implements Serializable {
 
     public void setIdPosition(Long idPosition) {
         this.idPosition = idPosition;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override
