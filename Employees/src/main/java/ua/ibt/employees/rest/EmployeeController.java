@@ -1,14 +1,14 @@
 package ua.ibt.employees.rest;
 
+import ua.ibt.api.EmployeeAPI;
+import ua.ibt.api.ListEmployeeAPI;
+import ua.ibt.api.SysMessage;
 import ua.ibt.employees.services.EmployeeMapper;
 import ua.ibt.employees.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.ibt.employees.jpa.Employee;
-import ua.ibt.employees_api.EmployeeAPI;
-import ua.ibt.employees_api.ListEmployeeAPI;
-import ua.ibt.employees_api.SysMessage;
 
 @RestController
 public class EmployeeController {

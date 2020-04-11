@@ -2,10 +2,10 @@ package ua.ibt.employees.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ua.ibt.api.EmployeeAPI;
+import ua.ibt.api.ProjectAPI;
 import ua.ibt.employees.jpa.Employee;
 import ua.ibt.employees.jpa.Project;
-import ua.ibt.employees_api.EmployeeAPI;
-import ua.ibt.employees_api.ProjectAPI;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation project(':EmployeesAPI')
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
     compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.2.5.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web

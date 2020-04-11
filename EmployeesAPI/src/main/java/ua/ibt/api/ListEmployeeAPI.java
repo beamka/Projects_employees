@@ -1,4 +1,4 @@
-package ua.ibt.employees_api;
+package ua.ibt.api;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
