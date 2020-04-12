@@ -8,6 +8,6 @@ import java.util.List;
 public interface ProjectRepository extends CrudRepository<Project, Long> {
     @Override
     List<Project> findAll();
-
-    //Project findOne(Long idProject);
+    Project findByIdProject(Long idProject);
+    void deleteByIdProject(Long idProject);
 }
