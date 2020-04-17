@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 500px;
+  width: 500px;
+}
+
+.example-header-image {
+ /* background-image: url('https://he.sitsite.com/wp-content/uploads/2017/09/team-member-icon-2-04.png');*/
+  background-image: url('https://lh3.googleusercontent.com/proxy/ZcKdSbVnTKa23o5y2cHs7r3hdwxVi85JzDDXDhQyiaD1c_rTNjxqlt7O3tOFgeN75oQpl6cQZi1tkMj6KNpaKf7eXBzZi3jkUg');
+  background-size: cover;
+
+}

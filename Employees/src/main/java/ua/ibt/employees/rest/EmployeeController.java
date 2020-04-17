@@ -54,6 +54,7 @@ public class EmployeeController {
         System.out.println(">>>>>>>>>> EmployeeController start getAllEmployees >>>>>>>>>>");
         ListEmployeeAPI outData = new ListEmployeeAPI();
         employeeService.getAllEmployees().forEach(employee -> outData.employees.add(employeeMapper.toOutside(employee)));
+//        return Response.ok(output).header("Access-Control-Allow-Origin", "*").build();
         return outData;
     }
 

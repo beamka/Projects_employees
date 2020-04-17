@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a mat-button href="start-menu">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+    </a>
+
+    <button mat-button [matMenuTriggerFor]="menu1">Сотрудники</button>
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item>
+        <mat-icon>playlist_add</mat-icon>
+        <span>Создать сотрудника</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>input</mat-icon>
+        <span>Изменить сотрудника</span>
+      </button>
+      <button mat-menu-item routerLink="/card-e-list">
+        <mat-icon>list</mat-icon>
+        <span>Получить список сотрудников</span>
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="menu2">Проекты</button>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item>
+        <mat-icon>playlist_add</mat-icon>
+        <span>Создать проект</span>
+      </button>
+      <button mat-menu-item routerLink="/card-p-list">
+        <mat-icon>list</mat-icon>
+        <span>Получить список проектов</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
