@@ -1,11 +1,11 @@
 import { Project } from './Project';
 export class Employee{
-  idEmployee: string;
-  iuadEmployee: string;
-  nameEmployee: string;
-  surnameEmployee: string;
-  middlenameEmployee: string;
-  idPosition: string;
-  birthdayEmployee: string;
-  projects: Project[];
+  public idEmployee: string;
+  public iuadEmployee: string;
+  public nameEmployee: string;
+  public surnameEmployee: string;
+  public middlenameEmployee: string;
+  public idPosition: string;
+  public birthdayEmployee: string;
+  public projects: Project[];
 }

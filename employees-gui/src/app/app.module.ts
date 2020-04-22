@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './data.service';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +21,11 @@ import { ListPComponent } from './list-p/list-p.component';
 
 import { EmployeeService } from './employee.service';
 import { ProjectService } from './project.service';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -42,12 +48,19 @@ import { ProjectService } from './project.service';
     MatCardModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: "card-e-list", component: ListEComponent },
-      { path: "card-p-list", component: ListPComponent },
-      { path: "start-menu", component: StartMenuComponent }
-    ])
+      {path: "start-menu", component: StartMenuComponent},
+      {path: "card-e-list", component: ListEComponent},
+      {path: "card-p-list", component: ListPComponent},
+      {path: "card-e/:employee", component: CardEComponent},
+      {path: "card-p", component: CardPComponent}
+    ]),
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [EmployeeService,ProjectService],
+  providers: [EmployeeService,ProjectService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

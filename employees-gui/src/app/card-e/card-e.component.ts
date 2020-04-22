@@ -1,37 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {Employee} from "../employee";
 import { EmployeeService } from '../employee.service';
+
 
 @Component({
   selector: 'app-card-e',
   templateUrl: './card-e.component.html',
-  styleUrls: ['./card-e.component.css']
+  styleUrls: ['./card-e.component.css'],
 })
 export class CardEComponent implements OnInit {
+  @Input() employee : Employee;
+  @Input() flagReadOnly : boolean;
+  @Input() flagEdit : boolean;
+  @Output() onClose : EventEmitter<boolean> =new EventEmitter<boolean>();
+
   employees : Employee[];
-  surname_e = 'Surname '
-  name_e = 'Name '
-  middlename_e = 'Middlename '
-  iuad_e = 'IUADXXXX'
-  birthday = '01.01.2001'
+  routEmployee: Employee;
+  // date = new Date(2010,5,10);
+  date;
 
-  links = './card-p.component.html'
-
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.routEmployee = Employee[+params.get('employee')];
+      this.date = new Date("2010/7/5");
+      //this.date =  new FormControl(new Date(10/10/2010));
+    });
   }
 
   getFIO(): string {
-    return this.name_e + ' ' + this.middlename_e + ' ' + this.surname_e
+    return this.employee.nameEmployee + ' ' + this.employee.middlenameEmployee + ' ' + this.employee.surnameEmployee
   }
 
-  testIUAD(){
-    this.iuad_e = 'SSSSSS'
+  clickClose() {
+    this.onClose.emit(true);
+  }
+
+  getTitle() {
+    if (this.flagEdit == true) {
+      return "Редактирование пользователя";
+    } else {
+      return "Добавление пользователя";
+    }
+  }
+
+  clickEdit(){
+    this.flagReadOnly = false;
+    this.flagEdit = true;
   }
 
 }
-
+//indata==true?this.show = false : this.show = true;
 // public Long idEmployee;
 // public String iuadEmployee;
 // public String nameEmployee;
