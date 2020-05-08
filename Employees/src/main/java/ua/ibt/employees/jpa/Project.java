@@ -28,7 +28,7 @@ public class Project implements Serializable {
     @Column(name = "desc_project")
     private String descProject;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "projects", cascade = CascadeType.REFRESH)
     private List<Employee> employees;
 
     public Project() {

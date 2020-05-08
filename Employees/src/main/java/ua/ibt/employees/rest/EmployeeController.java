@@ -23,8 +23,8 @@ public class EmployeeController {
         System.out.println(">>>>>>>>>> EmployeeController start newEmployee >>>>>>>>>>");
         ListEmployeeAPI outData = new ListEmployeeAPI();
         try {
-            Employee employee = employeeService.setEmployee(employeeMapper.toInside(inData));
-            outData.employees.add(employeeMapper.toOutside(employee));
+            Employee employee = employeeService.setEmployee(employeeMapper.toInside(inData, true));
+            outData.employees.add(employeeMapper.toOutside(employee, true));
         } catch (Exception e) {
             outData.retcode = -1;
             outData.sys_message = e.getMessage();
@@ -53,7 +53,7 @@ public class EmployeeController {
     public ListEmployeeAPI getAllEmployees() {
         System.out.println(">>>>>>>>>> EmployeeController start getAllEmployees >>>>>>>>>>");
         ListEmployeeAPI outData = new ListEmployeeAPI();
-        employeeService.getAllEmployees().forEach(employee -> outData.employees.add(employeeMapper.toOutside(employee)));
+        employeeService.getAllEmployees().forEach(employee -> outData.employees.add(employeeMapper.toOutside(employee, true)));
 //        return Response.ok(output).header("Access-Control-Allow-Origin", "*").build();
         return outData;
     }

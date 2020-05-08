@@ -40,7 +40,7 @@ public class EmployeeService {
         Employee employee = employeeRepository.findByIdEmployee(id);
         if(employee!=null){
             System.out.println("##### Deleting employee "+employee.getIuadEmployee() + " with id " + employee.getIdEmployee());
-            employeeRepository.deleteByIdEmployee(id);
+            employeeRepository.deleteById(id);
         }
     }
 }

@@ -1,1 +1,11 @@
-<p>list-p works!</p>
+<div class="card-p" *ngIf="show">
+  <app-card-p [project]="project" [flagReadOnly]="true" class="nav-list" (onUpdate)="updateList($event)" (onClose)="closeInfo($event)"></app-card-p>
+</div>
+<mat-nav-list *ngIf="!show" class="nav-list">
+  <p>Список проектов:</p>
+
+  <button mat-list-item (click)="showInfo(project)" class="nav-button" *ngFor="let project of projects" >
+    {{project.nameProject}} {{project.descProject}}
+  </button>
+
+</mat-nav-list>

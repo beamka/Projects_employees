@@ -21,8 +21,8 @@ public class ProjectController {
         System.out.println(">>>>>>>>>> ProjectController start newProject >>>>>>>>>>");
         ListProjectAPI outData = new ListProjectAPI();
         try {
-            Project project = projectService.setProject(projectMapper.toInside(inData));
-            outData.projects.add(projectMapper.toOutside(project));
+            Project project = projectService.setProject(projectMapper.toInside(inData, true));
+            outData.projects.add(projectMapper.toOutside(project, true));
         } catch (Exception e) {
             outData.retcode = -1;
             outData.sys_message = e.getMessage();
@@ -51,7 +51,7 @@ public class ProjectController {
     public ListProjectAPI getAllProject() {
         System.out.println(">>>>>>>>>> ProjectController start getAllProject >>>>>>>>>>");
         ListProjectAPI outData = new ListProjectAPI();
-        projectService.getAllProject().forEach(project -> outData.projects.add(projectMapper.toOutside(project)));
+        projectService.getAllProject().forEach(project -> outData.projects.add(projectMapper.toOutside(project, true)));
         return outData;
     }
 }

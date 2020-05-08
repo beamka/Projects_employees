@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 import { CardEComponent } from './card-e/card-e.component';
 import { CardPComponent } from './card-p/card-p.component';
 import { StartMenuComponent } from './start-menu/start-menu.component';
@@ -25,6 +26,9 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from "@angular/material/select";
+import { NewEComponent } from './new-e/new-e.component';
+import { NewPComponent } from './new-p/new-p.component';
 
 
 @NgModule({
@@ -35,7 +39,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     CardPComponent,
     StartMenuComponent,
     ListEComponent,
-    ListPComponent
+    ListPComponent,
+    NewEComponent,
+    NewPComponent
   ],
   imports: [
     BrowserModule,
@@ -46,19 +52,24 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatMenuModule,
     MatListModule,
     MatCardModule,
+    MatRadioModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path: "start-menu", component: StartMenuComponent},
+      {path: "start-menu/:msg", component: StartMenuComponent},
       {path: "card-e-list", component: ListEComponent},
       {path: "card-p-list", component: ListPComponent},
       {path: "card-e/:employee", component: CardEComponent},
-      {path: "card-p", component: CardPComponent}
+      {path: "card-p/:project", component: CardPComponent},
+      {path: "app-new-e/:flagEdit", component: NewEComponent},
+      {path: "app-new-p/:flagEdit", component: NewPComponent}
     ]),
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [EmployeeService,ProjectService,DataService],
   bootstrap: [AppComponent]

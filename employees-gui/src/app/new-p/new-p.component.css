@@ -31,3 +31,11 @@
 td {
   padding-right: 8px;
 }
+.card-p {
+  display: flex;
+  margin: 10px auto 32px;
+  padding: 0 16px;
+  align-items: center;
+  flex-direction: column;
+  max-width: 960px;
+}

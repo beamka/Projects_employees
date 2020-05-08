@@ -6,6 +6,6 @@ export class Employee{
   public surnameEmployee: string;
   public middlenameEmployee: string;
   public idPosition: string;
-  public birthdayEmployee: string;
+  public birthdayEmployee: Date;
   public projects: Project[];
 }

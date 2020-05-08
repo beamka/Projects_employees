@@ -1,14 +1,14 @@
-.project-card {
+.employee-card {
   max-width: 500px;
   width: 500px;
 }
 
-.project-header-image {
+.employee-header-image {
   background-image: url('https://i7.pngguru.com/preview/154/803/764/computer-icons-user-profile-avatar.jpg');
   background-size: cover;
 }
 
-.project-header-image-edit {
+.employee-header-image-edit {
   background-image: url('https://s1.iconbird.com/ico/2013/6/269/w512h5121371227384editprofile.png');
   background-size: cover;
 }
@@ -30,4 +30,23 @@
 
 td {
   padding-right: 8px;
+}
+
+.card-e {
+  display: flex;
+  margin: 10px auto 32px;
+  padding: 0 16px;
+  align-items: center;
+  flex-direction: column;
+  max-width: 960px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
 }

@@ -1,0 +1,96 @@
+<div class="card-p">
+<mat-card class="project-card">
+  <mat-card-header>
+    <button mat-icon-button class="button-close" *ngIf="show" color="primary" title="Закрыть" (click)="clickClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <div mat-card-avatar class="project-header-image-edit"></div>
+    <mat-card-title>{{getTitle()}}</mat-card-title>
+  </mat-card-header>
+
+
+
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Название</mat-label>
+<!--            [formControl]="name"-->
+            <input matInput [formControl]="name" [(ngModel)]="nameProject" (input)="flagValidData = true" value={{project.nameProject}} required>
+            <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Описание</mat-label>
+<!--            value={{project.descProject}}-->
+            <input matInput name="descProject" [(ngModel)]="descProject" >
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label id="example-radio-group-label">Список сотрудников на проекте:</label>
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let employee of employees" [value]="employee" (click)="showButtonDel(employee)">
+              {{employee.iuadEmployee}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <button mat-button (click)="clickDelEmployee(selectEmployee)" >Исключить сотрудника {{selectEmployee.iuadEmployee}}</button>
+
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Добавить сотрудника</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let employee of employeesAll" [value]="employee" (click)="showButtonAdd(employee)">
+                {{employee.iuadEmployee}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="clickAddEmployee(selectAddEmployee)" >Подключить сотрудника {{selectAddEmployee.iuadEmployee}}</button>
+        </td>
+      </tr>
+
+
+
+
+
+      <tr>
+        <td>
+<!--          <mat-form-field class="example-full-width">-->
+<!--            <mat-label>Список сотрудников</mat-label>-->
+<!--            &lt;!&ndash;            <mat-select [formControl]="toppings" multiple>&ndash;&gt;-->
+<!--            &lt;!&ndash;              <mat-select-trigger>&ndash;&gt;-->
+<!--            &lt;!&ndash;                {{toppings.value ? toppings.value[0] : ''}}&ndash;&gt;-->
+<!--            &lt;!&ndash;                <span *ngIf="toppings.value?.length > 1" class="example-additional-selection">&ndash;&gt;-->
+<!--            &lt;!&ndash;        (+{{toppings.value.length - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})&ndash;&gt;-->
+<!--            &lt;!&ndash;      </span>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </mat-select-trigger>&ndash;&gt;-->
+<!--            &lt;!&ndash;              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </mat-select>&ndash;&gt;-->
+<!--          </mat-form-field>-->
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <!--  <mat-card-content>-->
+  <!--    <p>Логин: {{employee.iuadEmployee}}</p>-->
+  <!--    <p>-->
+  <!--      Список проектов: projects...-->
+  <!--    </p>-->
+
+  <!--  </mat-card-content>-->
+  <mat-card-actions>
+    <button mat-button (click)="clickSave()">Сохранить</button>
+    <button mat-button [routerLink]="['/start-menu']">Отмена</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>

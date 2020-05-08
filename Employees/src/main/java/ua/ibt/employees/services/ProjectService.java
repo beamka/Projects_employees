@@ -39,7 +39,7 @@ public class ProjectService {
         Project project = projectRepository.findByIdProject(id);
         if(project!=null){
             System.out.println("##### Deleting project "+project.getNameProject() + " with id " + project.getIdProject());
-            projectRepository.deleteByIdProject(id);
+            projectRepository.deleteById(id);
         }
     }
 

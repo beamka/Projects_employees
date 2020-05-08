@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../data.service';
  import { Employee } from '../Employee';
-import {Observable} from "rxjs";
-//import { Project } from './Project';
-import { HttpClient } from '@angular/common/http';
+ import {EmployeeService} from '../employee.service';
 
 @Component({
   selector: 'app-list-e',
@@ -11,13 +9,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./list-e.component.css']
 })
 export class ListEComponent implements OnInit {
-//  employees : Employee[];
-  // employees$: Observable<Employee[]>;
   employee: Employee;
   employees: Employee[];
   show = false;
 
-  constructor(private dataService: DataService, private http: HttpClient) {
+  constructor(
+    private dataService: DataService,
+    private employeeService: EmployeeService
+    ) {
   }
 
   ngOnInit(): void {
@@ -39,6 +38,12 @@ export class ListEComponent implements OnInit {
 
   closeInfo(indata:any) {
     indata==true?this.show = false : this.show = true;
+  }
+
+  updateList(indata:any) {
+    if(indata) {
+      this.getEmployees();
+    }
   }
 
 }

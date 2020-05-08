@@ -6,7 +6,7 @@
 
     <button mat-button [matMenuTriggerFor]="menu1">Сотрудники</button>
     <mat-menu #menu1="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['/app-new-e', false]">
         <mat-icon>playlist_add</mat-icon>
         <span>Создать сотрудника</span>
       </button>
@@ -22,7 +22,7 @@
 
     <button mat-button [matMenuTriggerFor]="menu2">Проекты</button>
     <mat-menu #menu2="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['/app-new-p', false]">
         <mat-icon>playlist_add</mat-icon>
         <span>Создать проект</span>
       </button>

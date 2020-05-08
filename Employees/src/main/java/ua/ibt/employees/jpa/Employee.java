@@ -44,9 +44,14 @@ public class Employee implements Serializable {
     @Column(name = "id_position")
     private Long idPosition;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    @JoinTable(name = "project", joinColumns =
-    @JoinColumn(name = "id_employee"),
+ //   @ManyToMany(cascade = CascadeType.REFRESH)
+//    @JoinTable(name = "project", joinColumns =
+//    @JoinColumn(name = "id_employee"),
+//            inverseJoinColumns = @JoinColumn(name = "id_project"))
+    @ManyToMany
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = @JoinColumn(name = "id_employee"),
             inverseJoinColumns = @JoinColumn(name = "id_project"))
     private List<Project> projects;
 

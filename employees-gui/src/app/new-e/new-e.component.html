@@ -1,0 +1,86 @@
+<div class="card-e">
+<mat-card class="employee-card">
+  <mat-card-header>
+    <button mat-icon-button class="button-close" *ngIf="show" color="primary" title="Закрыть" (click)="clickClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <div mat-card-avatar class="employee-header-image-edit"></div>
+    <mat-card-title>{{getTitle()}}</mat-card-title>
+  </mat-card-header>
+
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Имя</mat-label>
+            <input matInput name="nameEmployee"  [(ngModel)]="nameEmployee" value={{employee.nameEmployee}} required>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Отчество</mat-label>
+            <input matInput name="middlenameEmployee" [(ngModel)]="middlenameEmployee" value={{employee.middlenameEmployee}} >
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Фамилия</mat-label>
+            <input matInput name="surnameEmployee" [(ngModel)]="surnameEmployee" value={{employee.surnameEmployee}} required>
+
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Дата рождения</mat-label>
+            <input matInput [matDatepicker]="dp" [value]="birthdayEmployee">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Доменное имя</mat-label>
+            <input matInput placeholder="IUADXXXX" [formControl]="iuad" [(ngModel)]="iuadEmployee" (input)="flagValidData = true" value={{employee.iuadEmployee}} required>
+            <mat-error *ngIf="iuad.invalid">{{getErrorIUAD()}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label id="example-radio-group-label">Список проектов пользователя:</label>
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group">
+            <mat-radio-button class="example-radio-button" *ngFor="let project of projects" [value]="project" (click)="showButtonDel(project)">
+              {{project.nameProject}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <button mat-button (click)="clickDelProject(selectProject)" >Исключить проект {{selectProject.nameProject}}</button>
+
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Добавить проект</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let project of projectsAll" [value]="project" (click)="showButtonAdd(project)">
+                {{project.nameProject}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button (click)="clickAddProject(selectAddProject)" >Подключить проект {{selectAddProject.nameProject}}</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <mat-card-actions>
+<!--    [routerLink]="['/start-menu', 'Сохранено']"-->
+    <button mat-button (click)="clickSave()" >Сохранить</button>
+    <button mat-button [routerLink]="['/start-menu']">Отмена</button>
+  </mat-card-actions>
+</mat-card>
+</div>

@@ -16,7 +16,7 @@ public class ProjectMapper {
     @Autowired
     EmployeeMapper employeeMapper;
 
-    public Project toInside(ProjectAPI inData) {
+    public Project toInside(ProjectAPI inData , boolean bodyFull) {
         Project project = null;
         if(inData != null){
             project = new Project();
@@ -25,28 +25,34 @@ public class ProjectMapper {
             project.setDescProject(inData.descProject);
 
             List<Employee> employees = new ArrayList<>();
-            inData.employees.forEach(employee -> {
-                employees.add(employeeMapper.toInside(employee));
-            });
+            if(bodyFull) {
+                if (inData.employees != null && !inData.employees.isEmpty()) {
+                    inData.employees.forEach(employee -> {
+                        employees.add(employeeMapper.toInside(employee, false));
+                    });
+                }
+            }
             project.setEmployees(employees);
             System.out.println("##### toInside: result Project = "+ project);
         }
         return project;
     }
 
-    public ProjectAPI toOutside(Project inData) {
+    public ProjectAPI toOutside(Project inData, boolean bodyFull) {
         ProjectAPI projectAPI = null;
         if (inData != null) {
             projectAPI = new ProjectAPI();
             projectAPI.idProject = inData.getIdProject();
             projectAPI.nameProject = inData.getNameProject();
             projectAPI.descProject = inData.getDescProject();
-
-
             List<EmployeeAPI> employees = new ArrayList<>();
-            inData.getEmployees().forEach(employee -> {
-                employees.add(employeeMapper.toOutside(employee));
-            });
+            if(bodyFull) {
+                if (inData.getEmployees() != null && !inData.getEmployees().isEmpty()) {
+                    inData.getEmployees().forEach(employee -> {
+                        employees.add(employeeMapper.toOutside(employee, false));
+                    });
+                }
+            }
             projectAPI.employees = employees;
         }
         return projectAPI;

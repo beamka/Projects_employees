@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Project } from '../Project';
+import { DataService } from '../data.service';
+import {Employee} from "../employee";
 
 @Component({
   selector: 'app-list-p',
@@ -6,10 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-p.component.css']
 })
 export class ListPComponent implements OnInit {
+  project: Project;
+  projects: Project[];
+  show = false;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getProject();
+  }
+
+  getProject() {
+    this.dataService.sendGetRequest('/project/all')
+      .subscribe(data => {
+        console.log(data);
+        this.projects = data.projects;
+      });
+  }
+
+  showInfo(project: Project) {
+    this.project = project;
+    this.show = true;
+  }
+
+  closeInfo(indata:any) {
+    indata==true?this.show = false : this.show = true;
+  }
+
+  updateList(indata:any) {
+    if(indata) {
+      this.getProject();
+    }
   }
 
 }

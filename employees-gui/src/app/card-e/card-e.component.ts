@@ -2,6 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Employee} from "../employee";
 import { EmployeeService } from '../employee.service';
+import {FormControl} from '@angular/forms';
+import {DataService} from "../data.service";
 
 
 @Component({
@@ -14,20 +16,15 @@ export class CardEComponent implements OnInit {
   @Input() flagReadOnly : boolean;
   @Input() flagEdit : boolean;
   @Output() onClose : EventEmitter<boolean> =new EventEmitter<boolean>();
+  @Output() onUpdate : EventEmitter<boolean> =new EventEmitter<boolean>();
 
   employees : Employee[];
-  routEmployee: Employee;
-  // date = new Date(2010,5,10);
+
   date;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.routEmployee = Employee[+params.get('employee')];
-      this.date = new Date("2010/7/5");
-      //this.date =  new FormControl(new Date(10/10/2010));
-    });
   }
 
   getFIO(): string {
@@ -38,26 +35,24 @@ export class CardEComponent implements OnInit {
     this.onClose.emit(true);
   }
 
-  getTitle() {
-    if (this.flagEdit == true) {
-      return "Редактирование пользователя";
-    } else {
-      return "Добавление пользователя";
-    }
-  }
-
-  clickEdit(){
+  clickEdit(employee: Employee){
     this.flagReadOnly = false;
     this.flagEdit = true;
+    this.employee = employee;
+  }
+
+  closeInfo(indata:any) {
+    indata==true?this.flagReadOnly = false : this.flagReadOnly = true;
+  }
+
+  clickDelete(employee: Employee) {
+    this.dataService.sendGetRequest('/employee/del/'+ employee.idEmployee)
+      .subscribe(data => {
+        console.log(data);
+      });
+    this.onUpdate.emit(true);
+    this.onClose.emit(true);
   }
 
 }
-//indata==true?this.show = false : this.show = true;
-// public Long idEmployee;
-// public String iuadEmployee;
-// public String nameEmployee;
-// public String surnameEmployee;
-// public String middlenameEmployee;
-// public Long idPosition;
-// public Date birthdayEmployee;
-// public List<ProjectAPI> projects;
+

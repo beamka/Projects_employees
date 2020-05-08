@@ -1,17 +1,10 @@
-<!--        <pre>{{employees | json}}</pre>-->
-
+<!--        <pre>{{employees}}</pre>-->
 
 <div class="card-e" *ngIf="show">
-  <app-card-e [employee]="employee" [flagReadOnly]="true" class="nav-list" (onClose)="closeInfo($event)"></app-card-e>
-<!--  <button mat-icon-button (click)="closeInfo()" class="button-close" color="primary" title="Закрыть">-->
-<!--    <mat-icon>close</mat-icon>-->
-<!--  </button>-->
+  <app-card-e [employee]="employee" [flagReadOnly]="true" class="nav-list" (onUpdate)="updateList($event)" (onClose)="closeInfo($event)"></app-card-e>
 </div>
 <mat-nav-list *ngIf="!show" class="nav-list">
   <p>Список сотрудников:</p>
-<!--  <a mat-list-item routerLink="/card-e" *ngFor="let employee of employees">-->
-<!--    {{employee.iuadEmployee}} {{employee.nameEmployee}} {{employee.middlenameEmployee}} {{employee.surnameEmployee}}-->
-<!--  </a>-->
 
     <button mat-list-item (click)="showInfo(employee)" class="nav-button" *ngFor="let employee of employees" >
       {{employee.iuadEmployee}} {{employee.nameEmployee}} {{employee.middlenameEmployee}} {{employee.surnameEmployee}}

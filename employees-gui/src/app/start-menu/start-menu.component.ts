@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-start-menu',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./start-menu.component.css']
 })
 export class StartMenuComponent implements OnInit {
+  msg : string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.msg = route.snapshot.params['msg'];
+  }
 
   ngOnInit(): void {
   }
