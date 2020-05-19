@@ -3,32 +3,33 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatInputModule} from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from "@angular/material/select";
+
+import { ToolbarComponent } from './toolbar/toolbar.component';
 import { CardEComponent } from './card-e/card-e.component';
 import { CardPComponent } from './card-p/card-p.component';
 import { StartMenuComponent } from './start-menu/start-menu.component';
 import { ListEComponent } from './list-e/list-e.component';
 import { ListPComponent } from './list-p/list-p.component';
+import { NewEComponent } from './new-e/new-e.component';
+import { NewPComponent } from './new-p/new-p.component';
 
 import { EmployeeService } from './employee.service';
 import { ProjectService } from './project.service';
-import {MatInputModule} from '@angular/material/input';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatSelectModule} from "@angular/material/select";
-import { NewEComponent } from './new-e/new-e.component';
-import { NewPComponent } from './new-p/new-p.component';
 
 
 @NgModule({

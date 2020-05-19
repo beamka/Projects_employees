@@ -5,20 +5,19 @@
       <mat-icon>close</mat-icon>
     </button>
     <div mat-card-avatar class="project-header-image-edit"></div>
-    <mat-card-title>{{getTitle()}}</mat-card-title>
+    <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
 
 
 
-  <form class="example-form">
+  <form class="example-form" [formGroup]="projectGroup">
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Название</mat-label>
-<!--            [formControl]="name"-->
-            <input matInput [formControl]="name" [(ngModel)]="nameProject" (input)="flagValidData = true" value={{project.nameProject}} required>
-            <mat-error *ngIf="name.invalid">{{getErrorName()}}</mat-error>
+            <input matInput formControlName="name" (input)="flagValidData = true" required>
+            <mat-error *ngIf="projectGroup.controls['name'].invalid">{{getErrorName(projectGroup)}}</mat-error>
           </mat-form-field>
         </td>
       </tr>
@@ -26,8 +25,8 @@
         <td>
           <mat-form-field class="example-full-width">
             <mat-label>Описание</mat-label>
-<!--            value={{project.descProject}}-->
-            <input matInput name="descProject" [(ngModel)]="descProject" >
+            <input matInput formControlName="desc" (input)="flagValidData = true" required>
+            <mat-error *ngIf="projectGroup.controls['desc'].invalid">{{getErrorDesc(projectGroup)}}</mat-error>
           </mat-form-field>
         </td>
       </tr>

@@ -4,7 +4,7 @@ import {Employee} from "../employee";
 import {DataService} from "../data.service";
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
-import {FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-p',
@@ -16,33 +16,35 @@ export class NewPComponent implements OnInit {
   @Input() flagEdit : boolean;
   @Output() editClose : EventEmitter<boolean> =new EventEmitter<boolean>();
 
+  title : string;
   show : boolean;
   flagValidData : boolean = true;
+  projectGroup : FormGroup;
 
-  idProject: string;
-  nameProject: string;
-  descProject: string;
+  private idProject: string;
   employees: Employee[];
 
   selectEmployee : Employee;
   selectAddEmployee : Employee;
   employeesAll : Employee[];
 
-  name = new FormControl('', [Validators.required]);
-
   constructor(private route: ActivatedRoute, private dataService: DataService,private router: Router) {
     this.flagEdit = route.snapshot.params['flagEdit'];
+    this.title = this.getTitle();
     this.project = this.getEmtyProject();
     this.selectEmployee = this.getEmtyEmployee();
     this.selectAddEmployee = this.getEmtyEmployee();
     this.getAllEmployee();
+
+    this.projectGroup = this.setFormGroup(this.getEmtyProject());
   }
 
   ngOnInit(): void {
+    this.title = this.getTitle();
     this.idProject = this.project.idProject;
-    this.nameProject = this.project.nameProject;
-    this.descProject = this.project.descProject;
     this.employees = this.project.employees;
+
+    this.projectGroup = this.setFormGroup(this.project);
   }
 
   getTitle() {
@@ -55,12 +57,33 @@ export class NewPComponent implements OnInit {
     }
   }
 
+  private setFormGroup(project : Project) : FormGroup{
+    const formGroup = new FormGroup({
+      name : new FormControl(project.nameProject, [Validators.required]),
+      desc : new FormControl(project.descProject, [Validators.required]),
+    });
+    return formGroup;
+  }
+
+  getErrorName(formGroup : FormGroup) {
+    if (formGroup.controls['name'].hasError('required')) {
+      this.flagValidData = false;
+      return 'Укажите название проекта';
+    }
+  }
+  getErrorDesc(formGroup : FormGroup) {
+    if (formGroup.controls['desc'].hasError('required')) {
+      this.flagValidData = false;
+      return 'Укажите описание проекта';
+    }
+  }
+
   clickSave() {
     if (this.flagValidData) {
       const saveProject: Project = {
         idProject: this.idProject,
-        nameProject: this.nameProject,
-        descProject: this.descProject,
+        nameProject: this.projectGroup.value.name,
+        descProject: this.projectGroup.value.desc,
         employees: this.employees
       }
       this.dataService.sendPostRequest('/project/set', saveProject)
@@ -68,13 +91,6 @@ export class NewPComponent implements OnInit {
           console.log(data);
         });
       this.router.navigate(['/start-menu', 'Проект сохранено!']);
-    }
-  }
-
-  getErrorName() {
-     if (this.name.hasError('required')) {
-       this.flagValidData = false;
-      return 'Укажите название проекта';
     }
   }
 

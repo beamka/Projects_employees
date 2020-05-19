@@ -4,7 +4,7 @@ import { Project } from '../project';
 import {DataService} from "../data.service";
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
-import {FormControl, Validators} from '@angular/forms';
+import {FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-e',
@@ -17,55 +17,60 @@ export class NewEComponent implements OnInit {
   @Input() flagEdit : boolean;
   @Output() editClose : EventEmitter<boolean> =new EventEmitter<boolean>();
 
-  iuad = new FormControl('', [Validators.required, Validators.pattern(/^[0-9A-Za-z]{8}$/)]);
-
-  idEmployee : string;
-  iuadEmployee : string;
-  nameEmployee : string;
-  surnameEmployee : string;
-  middlenameEmployee : string;
-  //private Long idPosition;
-  birthdayEmployee : Date;
-  projects : Project[];
+  title : string;
   show : boolean;
   flagValidData : boolean = true;
+  employeeGroup : FormGroup;
+
+  private idEmployee : string;
+  projects : Project[];
+
 
   selectProject : Project;
   selectAddProject : Project;
   projectsAll : Project[];
 
 
+
   constructor(private route: ActivatedRoute, private dataService: DataService,private router: Router) {
     this.flagEdit = route.snapshot.params['flagEdit'];
+    this.title = this.getTitle();
     this.employee = this.getEmtyEmployee();
     this.selectProject = this.getEmtyProject();
     this.selectAddProject = this.getEmtyProject();
     this.getAllProject();
+
+    this.employeeGroup = this.setFormGroup(this.getEmtyEmployee());
   }
 
   ngOnInit(): void {
+    this.title = this.getTitle();
     this.idEmployee = this.employee.idEmployee;
-    this.iuadEmployee = this.employee.iuadEmployee;
-    this.nameEmployee = this.employee.nameEmployee;
-    this.surnameEmployee = this.employee.surnameEmployee;
-    this.middlenameEmployee = this.employee.middlenameEmployee;
-    this.birthdayEmployee = new Date(this.employee.birthdayEmployee);
     this.projects = this.employee.projects;
+
+    this.employeeGroup = this.setFormGroup(this.employee);
+    // this.employeeGroup.valueChanges.subscribe(value => {
+    //   console.log(value);
+    // })
   }
 
-  getErrorIUAD() {
-    if (this.iuad.hasError('required')) {
-      this.flagValidData = false;
-      return 'Укажите логин сотрудника';
-    }
-    if (!this.iuad.hasError('iuad')) {
-      this.flagValidData = false;
-      return 'Логин должен быть в формате IUADXXXX';
-    }
-   // return this.iuad.hasError('iuad') ? '' : 'Логин должен быть в формате IUADXXXX';
+  private setFormGroup(employee : Employee) : FormGroup{
+    const formGroup = new FormGroup({
+      iuad : new FormControl(employee.iuadEmployee, [Validators.required, Validators.pattern(/^[0-9A-Za-z]{8}$/)]),
+      name : new FormControl(employee.nameEmployee, [Validators.required]),
+      surname : new FormControl(employee.surnameEmployee, [Validators.required]),
+      middlename : new FormControl(employee.middlenameEmployee),
+      birthday : new FormControl(new Date(employee.birthdayEmployee)),
+     // projects : new FormArray([]),
+    });
+      // employee.projects.forEach(project=>{
+      //   (formGroup.controls['projects'] as FormArray).push(new FormControl(project.nameProject));});
+
+      return formGroup;
+   // formGroup.controls['projects'].removeAt(index);
   }
 
-  getTitle() {
+  private getTitle() : string{
     if (this.flagEdit == true) {
       this.show = true;
       return "Редактирование пользователя";
@@ -75,6 +80,33 @@ export class NewEComponent implements OnInit {
     }
   }
 
+  getErrorFormName(formGroup : FormGroup) {
+    if (formGroup.controls['name'].hasError('required')) {
+      this.flagValidData = false;
+      return 'Укажите имя сотрудника';
+    }
+  }
+
+  getErrorFormSurname(formGroup : FormGroup) {
+    if (formGroup.controls['surname'].hasError('required')) {
+      this.flagValidData = false;
+      return 'Укажите фамилию сотрудника';
+    }
+  }
+
+  getErrorFormIUAD(formGroup : FormGroup) {
+    if (formGroup.controls['iuad'].hasError('required')) {
+      this.flagValidData = false;
+      return 'Укажите логин сотрудника';
+    }
+    if (!formGroup.controls['iuad'].hasError('iuad')) {
+      this.flagValidData = false;
+      return 'Логин должен быть в формате IUADXXXX';
+    }
+  }
+
+
+
   clickClose() {
     this.projects = this.employee.projects;
     this.editClose.emit(false);
@@ -83,14 +115,14 @@ export class NewEComponent implements OnInit {
   clickSave() {
     if (this.flagValidData) {
       const saveEmployee: Employee = {
-        birthdayEmployee: this.birthdayEmployee,
-        idPosition: "1",
-        iuadEmployee: this.iuadEmployee,
-        middlenameEmployee: this.middlenameEmployee,
-        projects: this.projects,
-        surnameEmployee: this.surnameEmployee,
+        birthdayEmployee: new Date(this.employeeGroup.value.birthday),
+        idPosition: "2",
+        iuadEmployee: this.employeeGroup.value.iuad,
+        middlenameEmployee: this.employeeGroup.value.middlename,
+        surnameEmployee: this.employeeGroup.value.surname,
+        nameEmployee: this.employeeGroup.value.name,
         idEmployee: this.idEmployee,
-        nameEmployee: this.nameEmployee
+        projects: this.projects
       }
       this.dataService.sendPostRequest('/employee/set', saveEmployee)
         .subscribe(data => {
@@ -121,7 +153,6 @@ export class NewEComponent implements OnInit {
       employees : []
     }
   }
-
 
   showButtonDel(project: any) {
     this.selectProject = project;
