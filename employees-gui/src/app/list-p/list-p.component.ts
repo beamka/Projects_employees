@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, OnInit, Input } from '@angular/core';
 import { Project } from '../Project';
 import { DataService } from '../data.service';
 import {Employee} from "../employee";
@@ -13,7 +13,9 @@ export class ListPComponent implements OnInit {
   public projects: Project[];
   public show = false;
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit(): void {
     this.getProject();
@@ -22,7 +24,7 @@ export class ListPComponent implements OnInit {
   getProject(){
     this.dataService.sendGetRequest('/project/all')
       .subscribe(data => {
-        console.log(data);
+        //console.log(data);
         this.projects = data.projects;
       });
   }

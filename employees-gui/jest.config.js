@@ -145,6 +145,10 @@ module.exports = {
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
   //snapshotSerializers: ['<rootDir>/src/__serializers__/processed-source.ts'],
+  snapshotSerializers: [
+    'jest-preset-angular/build/AngularSnapshotSerializer.js',
+    'jest-preset-angular/build/HTMLCommentSerializer.js'
+  ],
 
   // The test environment that will be used for testing
   //testEnvironment: "node",
