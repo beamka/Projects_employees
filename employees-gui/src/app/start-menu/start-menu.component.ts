@@ -8,9 +8,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StartMenuComponent implements OnInit {
   msg : string;
+  private activatedRoute: ActivatedRoute;
 
   constructor(private route: ActivatedRoute) {
-    this.msg = route.snapshot.params['msg'];
+    this.activatedRoute = route;
+    //this.msg = route.snapshot.params['msg'];
+    this.msg = this.getMsg();
+  }
+
+  getMsg(){
+    return this.activatedRoute.snapshot.params['msg'];
   }
 
   ngOnInit(): void {

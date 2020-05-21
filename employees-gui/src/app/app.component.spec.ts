@@ -1,31 +1,25 @@
-import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('Should create the App', () => {
+    const fixture = new AppComponent();
+    expect(fixture.title).toEqual('employees-gui');
   });
 
-  it(`should have as title 'employees-gui'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('employees-gui');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('employees-gui app is running!');
-  });
 });
+
+function setup() {
+
+  const builder = {
+
+    default() {
+      return builder;
+    },
+    build() {
+      return new AppComponent();
+    }
+  };
+
+  return builder;
+}

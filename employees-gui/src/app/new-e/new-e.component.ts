@@ -1,6 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import {Employee} from "../employee";
+import {EmployeeService} from "../employee.service";
 import { Project } from '../project';
+import {ProjectService} from "../project.service";
 import {DataService} from "../data.service";
 import { ActivatedRoute } from '@angular/router';
 import { Router } from "@angular/router";
@@ -25,22 +27,29 @@ export class NewEComponent implements OnInit {
   private idEmployee : string;
   projects : Project[];
 
-
   selectProject : Project;
   selectAddProject : Project;
   projectsAll : Project[];
 
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private router: Router,
+    private projectService: ProjectService,
+    private employeeService: EmployeeService
+  )
 
+  {
 
-  constructor(private route: ActivatedRoute, private dataService: DataService,private router: Router) {
     this.flagEdit = route.snapshot.params['flagEdit'];
+
     this.title = this.getTitle();
-    this.employee = this.getEmtyEmployee();
-    this.selectProject = this.getEmtyProject();
-    this.selectAddProject = this.getEmtyProject();
+    this.employee = employeeService.getEmtyEmployee();
+    this.selectProject = projectService.getEmtyProject();
+    this.selectAddProject = projectService.getEmtyProject();
     this.getAllProject();
 
-    this.employeeGroup = this.setFormGroup(this.getEmtyEmployee());
+    this.employeeGroup = this.setFormGroup(employeeService.getEmtyEmployee());
   }
 
   ngOnInit(): void {
@@ -53,6 +62,7 @@ export class NewEComponent implements OnInit {
     //   console.log(value);
     // })
   }
+
 
   private setFormGroup(employee : Employee) : FormGroup{
     const formGroup = new FormGroup({
@@ -105,8 +115,6 @@ export class NewEComponent implements OnInit {
     }
   }
 
-
-
   clickClose() {
     this.projects = this.employee.projects;
     this.editClose.emit(false);
@@ -129,28 +137,6 @@ export class NewEComponent implements OnInit {
           console.log(data);
         });
       this.router.navigate(['/start-menu', 'Сохранено']);
-    }
-  }
-
-  getEmtyEmployee() : Employee{
-    return  {
-      birthdayEmployee: new Date(),
-      idPosition: "",
-      iuadEmployee: "",
-      middlenameEmployee: "",
-      projects: [],
-      surnameEmployee: "",
-      idEmployee: new Date().getMilliseconds().toString(),
-      nameEmployee: ""
-    }
-  }
-
-  getEmtyProject() : Project{
-    return  {
-      idProject: new Date().getMilliseconds().toString(),
-      nameProject: "",
-      descProject: "",
-      employees : []
     }
   }
 

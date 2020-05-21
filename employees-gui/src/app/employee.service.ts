@@ -11,7 +11,19 @@ export class EmployeeService {
 
   constructor(
     private dataService: DataService
-  ) {
+  ) {}
+
+  getEmtyEmployee() : Employee{
+    return  {
+      birthdayEmployee: new Date(),
+      idPosition: "",
+      iuadEmployee: "",
+      middlenameEmployee: "",
+      projects: [],
+      surnameEmployee: "",
+      idEmployee: new Date().getMilliseconds().toString(),
+      nameEmployee: ""
+    }
   }
 
   getEmployees(employees : Employee[]): any {

@@ -9,9 +9,9 @@ import {Employee} from "../employee";
   styleUrls: ['./list-p.component.css']
 })
 export class ListPComponent implements OnInit {
-  project: Project;
-  projects: Project[];
-  show = false;
+  public project: Project;
+  public projects: Project[];
+  public show = false;
 
   constructor(private dataService: DataService) { }
 
@@ -19,7 +19,7 @@ export class ListPComponent implements OnInit {
     this.getProject();
   }
 
-  getProject() {
+  getProject(){
     this.dataService.sendGetRequest('/project/all')
       .subscribe(data => {
         console.log(data);

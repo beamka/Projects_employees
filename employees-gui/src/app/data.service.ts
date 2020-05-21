@@ -19,4 +19,6 @@ export class DataService {
   public sendPostRequest(path, body) : Observable<any>{
     return this.httpClient.post<any>(this.REST_API_SERVER+path, body);
   }
+
 }
+
