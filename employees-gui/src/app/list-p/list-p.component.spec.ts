@@ -25,7 +25,6 @@ describe('ListPComponent', () => {
       descProject: "222",
       employees : []
     }];
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -60,6 +59,11 @@ describe('ListPComponent', () => {
     expect(dataService.sendGetRequest).toHaveBeenCalled();
   });
 
+  it('when updateList is called it should', () => {
+    component.updateList(true);
+    expect(component.projects).toBe(projectTestList);
+  });
+
   it('when showInfo is called it should', () => {
     component.showInfo(projectTestList[0]);
     expect(component.project.nameProject).toEqual("testName1");
@@ -73,6 +77,8 @@ describe('ListPComponent', () => {
     component.ngOnInit();
     expect(component.show).toEqual(false);
   });
+
+
 });
 
 

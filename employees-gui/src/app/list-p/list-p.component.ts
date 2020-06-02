@@ -21,6 +21,12 @@ export class ListPComponent implements OnInit {
     this.getProject();
   }
 
+  updateList(indata:any) {
+    if(indata) {
+      this.getProject();
+    }
+  }
+
   getProject(){
     this.dataService.sendGetRequest('/project/all')
       .subscribe(data => {
@@ -38,10 +44,5 @@ export class ListPComponent implements OnInit {
     indata==true?this.show = false : this.show = true;
   }
 
-  updateList(indata:any) {
-    if(indata) {
-      this.getProject();
-    }
-  }
 
 }

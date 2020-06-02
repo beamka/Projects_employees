@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
@@ -31,11 +31,14 @@ import { NewPComponent } from './new-p/new-p.component';
 import { EmployeeService } from './employee.service';
 import { ProjectService } from './project.service';
 
+import {createCustomElement} from '@angular/elements';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    //ProjectsEmployeesComponent,
     ToolbarComponent,
     CardEComponent,
     CardPComponent,
@@ -74,6 +77,16 @@ import { ProjectService } from './project.service';
     MatSelectModule
   ],
   providers: [EmployeeService,ProjectService,DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [],
+  entryComponents: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+  }
+
+  ngDoBootstrap(){
+    const custom = createCustomElement(AppComponent,{injector: this.injector});
+    customElements.define('app-employees-gui', custom);
+
+  }
+}

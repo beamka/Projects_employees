@@ -85,14 +85,15 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json',"node"],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  //  moduleNameMapper: {
-  //   '@app/(.*)': '/src/app/$1',
-  //    '@assets/(.*)': '/src/assets/$1',
-  //    '@core/(.*)': '/src/app/core/$1',
-  //    '@env/(.*)': '/src/environments/environment',
-  //    '@src/(.*)': '/src/src/$1',
-  //    '@state/(.*)': '/src/app/state/$1'
-  //  },
+   moduleNameMapper: {
+    '@app/(.*)': '<rootDir>/src/app/$1',
+     '@assets/(.*)': '<rootDir>/src/assets/$1',
+     '@core/(.*)': '<rootDir>/src/app/core/$1',
+     '@env/(.*)': '<rootDir>/src/environments/environment',
+     '@src/(.*)': '<rootDir>/src/src/$1',
+     '@state/(.*)': '<rootDir>/src/app/state/$1',
+     'autoSpy': '<rootDir>/auto-spy.ts'
+   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
