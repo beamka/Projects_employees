@@ -8,10 +8,10 @@
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall:bak": "",
-    "postinstall": "ngcc",
-    "build:externals": "ng build --extra-webpack-config webpack.externals.js --prod --single-bundle",
-    "build:employees-gui:externals": "ng build --extra-webpack-config webpack.externals.js --prod --project employees-gui --single-bundle"
+    "build:prod": "ng build --prod --output-hashing=none",
+    "package": "cat dist/elements-demo/{runtime,polyfills,scripts,main}.js | gzip > elements.js.gz",
+    "serve": "http-server --gzip"
+
   },
   "private": true,
   "dependencies": {

@@ -5,9 +5,9 @@
     "outDir": "./dist/out-tsc",
     "types": ["jest"],
     "typeRoots": ["./src/types", "node_modules/@types"],
-    "paths": {
-      "autospy": ["./auto-spy"]
-    },
+//    "paths": {
+//      "autospy": ["./auto-spy"]
+//    },
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,

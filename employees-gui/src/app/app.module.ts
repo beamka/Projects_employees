@@ -77,7 +77,7 @@ import {createCustomElement} from '@angular/elements';
     MatSelectModule
   ],
   providers: [EmployeeService,ProjectService,DataService],
-  bootstrap: [],
+  //bootstrap: [AppComponent],
   entryComponents: [AppComponent]
 })
 export class AppModule {
@@ -86,7 +86,8 @@ export class AppModule {
 
   ngDoBootstrap(){
     const custom = createCustomElement(AppComponent,{injector: this.injector});
-    customElements.define('app-employees-gui', custom);
-
+    if(!window.customElements.get('app-employees-gui')){
+      window.customElements.define('app-employees-gui', custom);
+    }
   }
 }
