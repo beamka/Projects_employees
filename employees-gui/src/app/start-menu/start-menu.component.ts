@@ -17,7 +17,8 @@ export class StartMenuComponent implements OnInit {
   }
 
   getMsg(){
-    return this.activatedRoute.snapshot.params['msg'];
+    return "getMsg";
+    //return this.activatedRoute.snapshot.params['msg'];
   }
 
   ngOnInit(): void {
