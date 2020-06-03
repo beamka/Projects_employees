@@ -38,7 +38,6 @@ import {createCustomElement} from '@angular/elements';
 @NgModule({
   declarations: [
     AppComponent,
-    //ProjectsEmployeesComponent,
     ToolbarComponent,
     CardEComponent,
     CardPComponent,
@@ -78,16 +77,16 @@ import {createCustomElement} from '@angular/elements';
   ],
   providers: [EmployeeService,ProjectService,DataService],
   //bootstrap: [AppComponent],
-  entryComponents: [AppComponent]
+  entryComponents: [StartMenuComponent]
 })
 export class AppModule {
   constructor(private injector: Injector) {
   }
 
   ngDoBootstrap(){
-    const custom = createCustomElement(AppComponent,{injector: this.injector});
-    if(!window.customElements.get('app-employees-gui')){
-      window.customElements.define('app-employees-gui', custom);
+    const custom = createCustomElement(StartMenuComponent,{injector: this.injector});
+    if(!window.customElements.get('app-start-menu')){
+      window.customElements.define('app-start-menu', custom);
     }
   }
 }
